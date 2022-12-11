@@ -1,21 +1,23 @@
-defmodule Q1ElfCalories do
+defmodule Q1 do
   @moduledoc """
-  Documentation for `Q1ElfCalories`.
+  Documentation for `Q1`.
   """
 
   @doc """
-  Q1ElfCalories.run() will solve the first question
+  Q1.run() will solve the first question
   """
-  def run(file_name \\ "elf_calories.txt") do
+  def run(file_name \\ "q1.txt") do
     case File.read(file_name) do
       {:ok, data} ->  data
                         |> parse
-                        |> Enum.max
+                        |> Enum.sort
+                        |> Enum.take(-3)
+                        |> Enum.sum
     end
   end
 
   @doc """
-  Q1ElfCalories.parse() parse the input txt into a 2d array of each represent all elves baggage
+  Q1.parse() parse the input txt into an array of each represent calories of elf baggage
   """
   def parse(data) do
     data
