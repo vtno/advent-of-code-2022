@@ -59,7 +59,7 @@ defmodule Q3 do
   }
 
   @doc """
-  Q3.run will solve question 3
+  Q3.run will solve question 3 part 1
   """
   def run(file_name \\ "q3.txt") do
     case File.read(file_name) do
@@ -67,10 +67,45 @@ defmodule Q3 do
     end
   end
 
+    @doc """
+  Q3.run will solve question 3 part 2
+  """
+  def run2(file_name \\ "q3.txt") do
+    case File.read(file_name) do
+      {:ok, data} -> data
+        |> String.split("\n", trim: true)
+        |> Enum.chunk_every(3)
+        |> Enum.map(&find_dup(Enum.at(&1, 0), Enum.at(&1, 1), Enum.at(&1, 2)))
+        |> Enum.map(&get_priority(&1))
+        |> Enum.sum
+    end
+  end
+
+  @doc """
+  Q3.find_dup determine duplicate character from a given input string
+  """
   def find_dup(input) do
     head = input |> String.slice(0..div(String.length(input) - 1, 2)) |> String.split("", trim: true)
     tail = input |> String.slice(div(String.length(input), 2)..String.length(input)) |> String.split("", trim: true)
-    MapSet.intersection(MapSet.new(head), MapSet.new(tail))
+    find_dup(head, tail)
+  end
+
+  @doc """
+  Q3.find_dup determine duplicate character from a given input strings
+  """
+  def find_dup(first, second, last) do
+    MapSet.intersection(to_mapset(first), to_mapset(second))
+    |> MapSet.intersection(to_mapset(last))
+    |> MapSet.to_list
+    |> List.first
+  end
+
+  defp to_mapset(str) do
+    str |> String.split("", trim: true) |> MapSet.new
+  end
+
+  defp find_dup(src, target) do
+    MapSet.intersection(MapSet.new(src), MapSet.new(target))
     |> MapSet.to_list
     |> List.first
   end
