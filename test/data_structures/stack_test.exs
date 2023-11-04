@@ -37,4 +37,10 @@ defmodule StackTest do
         assert stack.data == [0, 1, 2, 3, 4]
     end
   end
+
+  describe "peek" do
+    test "return top item from the stack" do
+      assert Stack.new([1, 2, 3, 4]) |> Stack.peek == 1
+    end
+  end
 end

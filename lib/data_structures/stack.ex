@@ -23,4 +23,15 @@ defmodule Stack do
   def push(stack, element) do
     %Stack{data: [element | stack.data]}
   end
+
+  @doc"""
+  peek show top element of the stack
+  """
+  def peek(%Stack{data: [head | _]}), do: head
+end
+
+defimpl String.Chars, for: Stack do
+  def to_string(stack) do
+    "Stack: #{stack.data}"
+  end
 end
