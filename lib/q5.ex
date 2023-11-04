@@ -33,7 +33,7 @@ defmodule Q5 do
   @doc """
   Q5.run will solve question 5
   """
-  def run(file_name \\ "q5.txt", is_sample \\ true) do
+  def run(file_name \\ "q5.txt", is_sample \\ false) do
     initial_stacks =
       if is_sample do
         @sample_input_stacks

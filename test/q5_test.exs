@@ -16,11 +16,11 @@ move 3 from 1 to 2
 
   describe "run" do
     test "should solve sample problem" do
-      assert Q5.run("q5_test_fixture.txt") == "CMZ"
+      assert Q5.run("q5_test_fixture.txt", true) == "CMZ"
     end
 
     test "should solve actual problem" do
-      assert Q5.run("q5.txt", false) == "GRTSWNJHH"
+      assert Q5.run == "GRTSWNJHH"
     end
   end
 end
